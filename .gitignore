@@ -1,0 +1,45 @@
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# ---------- Virtual environments ----------
+.venv/
+venv/
+env/
+.python-version
+
+# ---------- Secrets (e.g. HF_TOKEN) ----------
+.env
+.env.*
+
+# ---------- Model weights & quantized outputs ----------
+# Large binaries should never be committed
+models/
+quantized/
+outputs/
+mlx_model/
+*.safetensors
+*.npz
+*.gguf
+*.bin
+*.pt
+*.pth
+*.ckpt
+
+# Hugging Face cache, if redirected into the repo
+.cache/
+hf_cache/
+
+# ---------- OS / editor ----------
+.DS_Store
+.vscode/
+.idea/
+*.swp
