@@ -9,8 +9,8 @@ description = "Quantization and KL-divergence evaluation with MLX. For learning 
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "mlx",
-    "mlx-lm",
+    "mlx==0.32.4",
+    "mlx-lm @ git+https://github.com/ml-explore/mlx-lm@736ab0d8c1d0edc79c3d798044fe6904e2fa23be",
     "numpy",
 ]
 
@@ -21,8 +21,11 @@ dev = [
     "pre-commit",
 ]
 
+[project.scripts]
+qlab = "quant_lab.cli:main"
+
 [tool.setuptools]
-# Only the library package is installed; quantize.py / evaluate.py are run as scripts.
+# Everything, including the `qlab` CLI (quant_lab/cli.py), lives in this package.
 packages = ["quant_lab"]
 
 [tool.ruff]
