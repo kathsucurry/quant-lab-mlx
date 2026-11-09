@@ -24,9 +24,8 @@ dev = [
 [project.scripts]
 qlab = "quant_lab.cli:main"
 
-[tool.setuptools]
-# Everything, including the `qlab` CLI (quant_lab/cli.py), lives in this package.
-packages = ["quant_lab"]
+[tool.setuptools.packages.find]
+include = ["quant_lab*"]
 
 [tool.ruff]
 line-length = 100
@@ -41,6 +40,7 @@ select = [
     "NPY",      # NumPy-specific checks
     "SIM",      # simplifications
 ]
+ignore = ["F841"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

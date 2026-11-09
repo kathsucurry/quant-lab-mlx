@@ -3,13 +3,23 @@
 import argparse
 from collections.abc import Sequence
 
-
-def _quantize(args: argparse.Namespace) -> int:
-    # TODO: load args.model, quantize it as args.quant_type, save to args.output_dir.
-    raise NotImplementedError("qlab quantize is not implemented yet")
+from .quant import quantize_model
 
 
-def _compute_kl(args: argparse.Namespace) -> int:
+def _quantize(args: argparse.Namespace):
+    quantize_model(
+        model_path=args.model,
+        model_quant_path=args.output_dir,
+    )
+
+    # from mlx_lm import load
+    # import mlx.core as mx
+    # model, tokenizer = load("Qwen/Qwen3-0.6B")
+
+    # mx.quantize(model, group_size=64, bits=8)
+
+
+def _compute_kl(args: argparse.Namespace):
     # TODO: run args.base and args.quantized on args.data and report the mean KL divergence.
     raise NotImplementedError("qlab compute_kl is not implemented yet")
 
@@ -23,25 +33,29 @@ def build_parser() -> argparse.ArgumentParser:
 
     quantize = subparsers.add_parser("quantize", help="Quantize a model.")
     quantize.add_argument("--model", required=True, help="Hugging Face repo id or local path.")
-    quantize.add_argument(
-        "--type", required=True, dest="quant_type", help="Quantization type, e.g. q4."
-    )
+    # quantize.add_argument(
+    #     "--type", required=True, dest="quant_type", help="Quantization type, e.g. q4."
+    # )
     quantize.add_argument(
         "--output-dir", default=None, help="Where to save. Default: outputs/<model>-<type>."
     )
     quantize.set_defaults(func=_quantize)
 
-    compute_kl = subparsers.add_parser(
-        "kl", help="KL divergence between a base and a quantized model."
-    )
-    compute_kl.add_argument("--base", required=True, help="Original model (repo id or path).")
-    compute_kl.add_argument("--quantized", required=True, help="Quantized model path.")
-    compute_kl.add_argument("--data", default="data/eval.txt", help="Eval text file.")
-    compute_kl.set_defaults(func=_compute_kl)
+    # compute_kl = subparsers.add_parser(
+    #     "kl", help="KL divergence between a base and a quantized model."
+    # )
+    # compute_kl.add_argument("--base", required=True, help="Original model (repo id or path).")
+    # compute_kl.add_argument("--quantized", required=True, help="Quantized model path.")
+    # compute_kl.add_argument("--data", default="data/eval.txt", help="Eval text file.")
+    # compute_kl.set_defaults(func=_compute_kl)
 
     return parser
 
 
-def main(argv: Sequence[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None):
     args = build_parser().parse_args(argv)
-    return args.func(args)
+    args.func(args)
+
+
+if __name__ == "__main__":
+    main()
