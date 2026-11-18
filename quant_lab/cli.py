@@ -37,7 +37,7 @@ def build_parser() -> argparse.ArgumentParser:
     #     "--type", required=True, dest="quant_type", help="Quantization type, e.g. q4."
     # )
     quantize.add_argument(
-        "--output-dir", default=None, help="Where to save. Default: outputs/<model>-<type>."
+        "--output-dir", default="outputs", help="Where to save. Default: outputs/"
     )
     quantize.set_defaults(func=_quantize)
 

@@ -7,7 +7,7 @@ name = "quant-lab-mlx"
 version = "0.1.0"
 description = "Quantization and KL-divergence evaluation with MLX. For learning purposes."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.13"
 dependencies = [
     "mlx==0.32.4",
     "mlx-lm @ git+https://github.com/ml-explore/mlx-lm@736ab0d8c1d0edc79c3d798044fe6904e2fa23be",
