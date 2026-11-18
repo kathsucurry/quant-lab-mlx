@@ -1,5 +1,5 @@
-OPTIONS_MODE = ["affine"]
 OPTIONS_GROUP_SIZE = [16, 32, 64, 128]
+OPTIONS_MODE = ["affine"]
 
 
 class QuantProperties:
@@ -17,6 +17,9 @@ class QuantProperties:
                 f"Quantizing with mode {self.mode} is not available. "
                 + f"Possible options: {OPTIONS_MODE}"
             )
+
+        if not isinstance(self.group_size, int):
+            raise ValueError("Group size must be an integer.")
 
         if self.group_size not in OPTIONS_GROUP_SIZE:
             raise ValueError(
